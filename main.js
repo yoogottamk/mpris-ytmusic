@@ -2,7 +2,7 @@ const Player = require("mpris-service"),
   io = require("socket.io")(9999),
   second2milli = 1000,
   seconds2micro = second2milli * second2milli,
-  events = ["play", "pause", "playpause", "next", "previous"],
+  events = ["play", "pause", "playpause", "next", "previous", "status"],
   metadata = {
     "title": "",
     "length": 0,
@@ -15,7 +15,7 @@ player = Player({
   supportedInterfaces: ["player"]
 });
 
-let state = Player.PLAYBACK_STATUS_STOPPED;
+let isPaused = null;
 
 for (const event of events) {
   player.on(event, () => {
@@ -28,8 +28,11 @@ io.on("connection", socket => {
     metadata.length= data.length;
     metadata.title= data.title;
     metadata.artist= data.artist;
-    state = data.playing;
+    isPaused = data.paused;
   });
+
+  // get status as soon as connection is established
+  io.emit("status");
 });
 
 setInterval(() => {
@@ -39,10 +42,12 @@ setInterval(() => {
     "xesam:artist": metadata.artist,
   };
 
-  if(state) {
-    player.playbackStatus = Player.PLAYBACK_STATUS_PLAYING;
-  } else {
+  if(isPaused == null) {
+    player.playbackStatus = Player.PLAYBACK_STATUS_STOPPED;
+  } else if (isPaused) {
     player.playbackStatus = Player.PLAYBACK_STATUS_PAUSED;
+  } else {
+    player.playbackStatus = Player.PLAYBACK_STATUS_PLAYING;
   }
 
 }, second2milli);

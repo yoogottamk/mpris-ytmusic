@@ -3,7 +3,7 @@ const socket = io("http://localhost:9999"),
     const tabs = await browser.tabs.query({url: "*://music.youtube.com/*"});
     return tabs[0];
   },
-  events = ["pause", "play", "playpause", "next", "previous"];
+  events = ["pause", "play", "playpause", "next", "previous", "status"];
 
 // send events to content script
 let cachedTab = null;
@@ -13,7 +13,13 @@ const sendMessage = async ev => {
     cachedTab = await getYTMusicTab();
   }
 
-  browser.tabs.sendMessage(cachedTab.id, {"action": ev});
+  try {
+    browser.tabs.sendMessage(cachedTab.id, {"action": ev});
+  } catch(err) {
+    cachedTab = await getYTMusicTab();
+
+    browser.tabs.sendMessage(cachedTab.id, {"action": ev});
+  }
 };
 
 for (const ev of events) {
@@ -30,7 +36,7 @@ const notify = data => {
       "title": title,
       "artist": artist,
       "length": min * 60 + sec,
-      "playing": !paused
+      "paused": paused
     };
 
   socket.emit("metadata", metadata);
