@@ -17,3 +17,7 @@ With this, you no longer need to open the ytmusic tab. You can now directly use 
  - Click on the cog icon
  - `Install Add-On From File`
  - Select this file
+
+### How to use
+ - `npm i`
+ - `node main.js` --> this can be placed in some startup script
