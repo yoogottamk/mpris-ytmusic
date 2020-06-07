@@ -7,20 +7,21 @@ const targetElements = [document.querySelector("video"), document.querySelector(
       return {
         "title": "",
         "artist": [""],
-        "time": "0:00 / 0:00",
+        "length": 0,
+        "position": 0,
         "paused": null,
       };
     }
 
     const {title} = document.querySelector(".middle-controls yt-formatted-string"),
       artist = [document.querySelector(".middle-controls a.yt-simple-endpoint.style-scope").text],
-      time = document.querySelector(".time-info").textContent.trim(),
-      {paused} = document.querySelector("video");
+      {paused, currentTime, duration} = document.querySelector("video");
 
     return {
       "title": title,
       "artist": artist,
-      "time": time,
+      "length": duration,
+      "position": currentTime,
       "paused": paused,
     };
   },

@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "YTMusic mpris integration",
-  "version": "0.1",
+  "version": "0.1.1",
   "background": {
     "scripts": ["socket.io.js", "background.js"]
   },

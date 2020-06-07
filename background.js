@@ -29,16 +29,7 @@ for (const ev of events) {
 }
 
 // receive and forward metadata
-const notify = data => {
-  const {title, artist, time, paused} = data,
-    [min, sec] = time.split(" ")[2].split(":").map(x => +x),
-    metadata = {
-      "title": title,
-      "artist": artist,
-      "length": min * 60 + sec,
-      "paused": paused
-    };
-
+const notify = metadata => {
   socket.emit("metadata", metadata);
 };
 

@@ -2,12 +2,14 @@ const Player = require("mpris-service"),
   io = require("socket.io")(9999),
   second2milli = 1000,
   seconds2micro = second2milli * second2milli,
-  events = ["play", "pause", "playpause", "next", "previous", "status"],
-  metadata = {
-    "title": "",
-    "length": 0,
-    "artist": [""],
-  };
+  events = ["play", "pause", "playpause", "next", "previous", "status"];
+
+let metadata = {
+  "title": "",
+  "length": 0,
+  "position": 0,
+  "artist": [""],
+};
 
 player = Player({
   name: "YTMusic",
@@ -25,10 +27,8 @@ for (const event of events) {
 
 io.on("connection", socket => {
   socket.on("metadata", data => {
-    metadata.length= data.length;
-    metadata.title= data.title;
-    metadata.artist= data.artist;
-    isPaused = data.paused;
+    metadata = data;
+    isPaused = metadata.paused;
   });
 
   // get status as soon as connection is established
@@ -37,6 +37,7 @@ io.on("connection", socket => {
 
 setInterval(() => {
   player.metadata = {
+    "mpris:position": metadata.position * seconds2micro,
     "mpris:length": metadata.length * seconds2micro,
     "xesam:title": metadata.title,
     "xesam:artist": metadata.artist,
