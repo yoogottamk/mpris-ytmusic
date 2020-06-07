@@ -19,5 +19,6 @@ With this, you no longer need to open the ytmusic tab. You can now directly use 
  - Select this file
 
 ### How to use
+ - Close this repo
  - `npm i`
  - `node main.js` --> this can be placed in some startup script
