@@ -9,3 +9,11 @@ With this, you no longer need to open the ytmusic tab. You can now directly use 
 
 ### Other benefits
  - polybar integration (script and polybar config can be found in [my dotfiles](https://github.com/yoogottamk/dotfiles); will be integrated here soon)
+
+### How do I install it
+ - Go to the releases tab
+ - Download the latest release
+ - Open firefox and go to `about:addons`
+ - Click on the cog icon
+ - `Install Add-On From File`
+ - Select this file
