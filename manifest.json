@@ -1,0 +1,23 @@
+{
+  "manifest_version": 2,
+  "name": "YTMusic mpris integration",
+  "version": "1.0",
+  "background": {
+    "scripts": ["node_modules/socket.io-client/dist/socket.io.js", "background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://music.youtube.com/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "permissions": [
+    "*://music.youtube.com/*",
+    "tabs"
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "mpris-ytmusic@yoogottamk.github.io"
+    }
+  }
+}
