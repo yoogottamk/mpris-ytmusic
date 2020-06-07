@@ -36,6 +36,10 @@ io.on("connection", socket => {
 });
 
 setInterval(() => {
+  if(isPaused === false) {
+    metadata.position += 1;
+  }
+
   player.metadata = {
     "mpris:position": metadata.position * seconds2micro,
     "mpris:length": metadata.length * seconds2micro,
