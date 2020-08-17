@@ -36,18 +36,18 @@ io.on("connection", socket => {
 });
 
 setInterval(() => {
-  if(isPaused === false) {
+  if (isPaused === false) {
     metadata.position += 1;
   }
 
   player.metadata = {
-    "mpris:position": metadata.position * seconds2micro,
-    "mpris:length": metadata.length * seconds2micro,
+    "mpris:position": Math.round(metadata.position * seconds2micro),
+    "mpris:length": Math.round(metadata.length * seconds2micro),
     "xesam:title": metadata.title,
     "xesam:artist": metadata.artist,
   };
 
-  if(isPaused == null) {
+  if (isPaused == null) {
     player.playbackStatus = Player.PLAYBACK_STATUS_STOPPED;
   } else if (isPaused) {
     player.playbackStatus = Player.PLAYBACK_STATUS_PAUSED;
