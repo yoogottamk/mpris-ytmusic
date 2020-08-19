@@ -22,3 +22,6 @@ With this, you no longer need to open the ytmusic tab. You can now directly use 
  - Clone this repo
  - `npm i`
  - `node main.js` --> this can be placed in some startup script
+
+### References
+ - https://github.com/valeriangalliat/playerctl-firefox-youtube
