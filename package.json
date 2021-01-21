@@ -19,6 +19,6 @@
   "homepage": "https://github.com/yoogottamk/mpris-ytmusic#readme",
   "dependencies": {
     "mpris-service": "^2.1.0",
-    "socket.io": "^2.3.0"
+    "socket.io": "^2.4.0"
   }
 }
