@@ -1,7 +1,7 @@
 {
   "name": "mpris-ytmusic",
-  "version": "1.0.0",
-  "description": "mpris integration for yt music",
+  "version": "0.2.1",
+  "description": "mpris integration for YT Music",
   "main": "main.js",
   "scripts": {
     "start": "node main.js",
@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/yoogottamk/mpris-ytmusic#readme",
   "dependencies": {
-    "mpris-service": "^2.1.0",
-    "socket.io": "^2.3.0"
+    "mpris-service": "^2.1.2",
+    "socket.io": "^2.4.1"
   }
 }
